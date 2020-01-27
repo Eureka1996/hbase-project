@@ -205,7 +205,7 @@ public class HBaseUtils {
     public void deleteData(String tableName,String rowKey,String cf,String cn) throws IOException {
         Table table = connection.getTable(TableName.valueOf(tableName));
         Delete delete = new Delete(Bytes.toBytes(rowKey));
-        delete.addColumn(Bytes.toBytes(cf),Bytes.toBytes(cn));
+        delete.addColumns(Bytes.toBytes(cf),Bytes.toBytes(cn));
         table.delete(delete);
         table.close();
     }
