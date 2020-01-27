@@ -183,4 +183,23 @@ public class HBaseUtils {
         return value;
     }
 
+    public List<String[]> scanData(String tableName) throws IOException {
+        Table table = connection.getTable(TableName.valueOf(tableName));
+        Scan scan = new Scan();
+        ResultScanner scanner = table.getScanner(scan);
+        List<String[]> returnResult = new ArrayList<String[]>();
+        for(Result result : scanner){
+            for(Cell cell : result.rawCells()){
+                String rowKey = Bytes.toString(CellUtil.cloneRow(cell));
+                String cf = Bytes.toString(CellUtil.cloneFamily(cell));
+                String cn = Bytes.toString(CellUtil.cloneQualifier(cell));
+                String value = Bytes.toString(CellUtil.cloneValue(cell));
+                String[] cellResult  = new String[]{rowKey,cf,cn,value};
+                returnResult.add(cellResult);
+            }
+        }
+        table.close();
+        return returnResult;
+    }
+
 }
