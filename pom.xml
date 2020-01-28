@@ -24,6 +24,14 @@
             <version>${hbase.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-server -->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+
+
     </dependencies>
 
 
