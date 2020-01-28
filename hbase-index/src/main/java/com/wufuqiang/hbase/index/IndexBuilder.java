@@ -31,9 +31,10 @@ public class IndexBuilder {
         return new IndexBuilder(zkQuorum);
     }
 
-    public void buildIndex(String tableName,String cf,String cn) throws IOException, ClassNotFoundException, InterruptedException {
+    public void buildIndex(String tableName,String cf,String ... cns) throws IOException, ClassNotFoundException, InterruptedException {
         this.configuration.set("tableName",tableName);
         this.configuration.set("cf",cf);
+        this.configuration.setStrings("cns",cns);
         Job job = Job.getInstance(this.configuration);
 
         job.setJarByClass(IndexBuilder.class);
